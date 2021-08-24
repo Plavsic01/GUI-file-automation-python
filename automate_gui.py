@@ -48,7 +48,9 @@ def target_path():
     global extension
     global target_dir
     extension = entry.get()
-    entry.delete(0,len(extension))
+    extension_length = len(extension)
+    extension = extension.split(",")
+    entry.delete(0,extension_length)
 
     #file_dialog for target dir -->
     target_dir = filedialog.askdirectory()
@@ -61,9 +63,10 @@ def start():
     files = os.listdir()
     specific_files = []
     print(extension)
-    for file in files:
-        if(file.endswith(extension)):
-            specific_files.append(file)
+    for i in range(len(extension)):
+        for file in files:
+            if(file.endswith(extension[i])):
+                specific_files.append(file)
 
     # print(specific_files)
 
